@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/worship/static/css/main.e6c13ad2.css",
-    "main.js": "/worship/static/js/main.ce07c294.js",
+    "main.js": "/worship/static/js/main.6548c04a.js",
     "index.html": "/worship/index.html",
     "main.e6c13ad2.css.map": "/worship/static/css/main.e6c13ad2.css.map",
-    "main.ce07c294.js.map": "/worship/static/js/main.ce07c294.js.map"
+    "main.6548c04a.js.map": "/worship/static/js/main.6548c04a.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.ce07c294.js"
+    "static/js/main.6548c04a.js"
   ]
 }
