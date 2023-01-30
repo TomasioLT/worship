@@ -1,5 +1,11 @@
 # Updating Github pages from Vs code:
 
+## Order after updating code explorer to PRODUCTION build:
+
+### `npm run deploy`
+### `git add .`
+### `git commit -m "update build for gh-pages"`
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
