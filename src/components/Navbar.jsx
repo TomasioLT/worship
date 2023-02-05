@@ -20,6 +20,7 @@ import { UserAuth } from "../context/AuthContext";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import SearchIcon from "@mui/icons-material/Search";
 import { Link, useNavigate } from "react-router-dom";
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import {
   alpha,
   Avatar,
@@ -469,6 +470,28 @@ export default function Navbar() {
                   </ListItemIcon>
                   <ListItemText sx={{ opacity: open ? 1 : 0, color: "black" }}>
                     Contacts
+                  </ListItemText>
+                </ListItemButton>
+              </StyledLink>
+            </ListItem>
+            <ListItem disablePadding sx={{ display: "block" }}>
+              <StyledLink component={Link} to="/create">
+                <ListItemButton
+                  sx={{
+                    minHeight: 48,
+                    justifyContent: open ? "initial" : "center",
+                    px: 2.5,
+                  }}>
+                  <ListItemIcon
+                    sx={{
+                      minWidth: 0,
+                      mr: open ? 3 : "auto",
+                      justifyContent: "center",
+                    }}>
+                    <EditOutlinedIcon />
+                  </ListItemIcon>
+                  <ListItemText sx={{ opacity: open ? 1 : 0, color: "black" }}>
+                    Create Song
                   </ListItemText>
                 </ListItemButton>
               </StyledLink>
