@@ -96,6 +96,26 @@ const CreateSong = () => {
       return oldValues.filter((songElementList) => songElementList !== value);
     });
   };
+
+  // Selected text
+  function getSelectedText() {
+    var selectedText = "";
+
+    // window.getSelection
+    if (window.getSelection) {
+      selectedText = window.getSelection();
+    }
+    // document.getSelection
+    else if (document.getSelection) {
+      selectedText = document.getSelection();
+    }
+    // document.selection
+    else if (document.selection) {
+      selectedText = document.selection.createRange().text;
+    } else return;
+    // To write the selected text into the textarea
+    document.testform.selectedtext.value = selectedText;
+  }
   return (
     <Box>
       <Typography variant="h2">Form</Typography>
@@ -178,14 +198,27 @@ const CreateSong = () => {
                 <Grid container columnSpacing={1} key={index}>
                   <Grid item xs={11} sm={10} md={9} lg={8}>
                     <Typography>{singleService.songElement}</Typography>
-
+                    <Container
+                      sx={{ border: 1 }}>{`Indeksas: ${index}`}</Container>
                     <TextField
+                      id={`indexas_${index}`}
                       multiline
+                      autoFocus={true}
                       minRows={5}
                       maxRows={12}
                       fullWidth
                       sx={{ position: "relative" }}
                     />
+                    <input
+                      type="button"
+                      value="Get Selection"
+                      onMouseDown={getSelectedText}></input>
+                    <form name="testform">
+                      <textarea
+                        name="selectedtext"
+                        rows="5"
+                        cols="20"></textarea>
+                    </form>
                   </Grid>
                   <Grid item xs={1} sx={{ pt: 3 }}>
                     <Fab
