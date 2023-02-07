@@ -271,7 +271,6 @@ export default function Navbar() {
                 id="account-menu"
                 open={openAvatar}
                 onClose={handleClose}
-                onClick={handleClose}
                 PaperProps={{
                   elevation: 0,
                   sx: {
