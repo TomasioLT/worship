@@ -1,4 +1,4 @@
-import { AddCircleOutline, AddOutlined } from "@mui/icons-material";
+import { AddOutlined } from "@mui/icons-material";
 import {
   Box,
   Paper,
@@ -7,56 +7,23 @@ import {
   Container,
   Grid,
   Button,
-  styled,
-  Input,
   FormControl,
   InputLabel,
   Select,
   MenuItem,
-  Slider,
   MenuList,
   ClickAwayListener,
   Grow,
   Popper,
   Fab,
-  SpeedDialAction,
-  SpeedDial,
 } from "@mui/material";
 import React, { useState } from "react";
-import RichTextEditor from "../components/RichTextEditor";
 import Tempo from "../components/Tempo";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
-import SongTextField from "../components/SongTextField";
 import { db } from "../firebase";
-import {
-  addDoc,
-  collection,
-  deleteDoc,
-  doc,
-  onSnapshot,
-  query,
-  querySnapshot,
-  updateDoc,
-} from "firebase/firestore";
+import { addDoc, collection } from "firebase/firestore";
 let nextId = 0;
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-}));
-const StyledSpeedDial = styled(SpeedDial)(({ theme }) => ({
-  position: "absolute",
-  "&.MuiSpeedDial-directionUp, &.MuiSpeedDial-directionLeft": {
-    bottom: theme.spacing(2),
-    right: theme.spacing(2),
-  },
-  "&.MuiSpeedDial-directionDown, &.MuiSpeedDial-directionRight": {
-    top: theme.spacing(2),
-    left: theme.spacing(2),
-  },
-}));
+
 const CreateSong = () => {
   // STATES:
   const [title, setTitle] = useState("");
@@ -80,13 +47,13 @@ const CreateSong = () => {
   const anchorRef = React.useRef(null);
 
   const handleToggle = () => {
-    setOpen((prevOpen) => !prevOpen);
+    setOpen((open) => !open);
   };
 
   const handleClose = (event) => {
-    if (anchorRef.current && anchorRef.current.contains(event.target)) {
-      return;
-    }
+    // if (anchorRef.current && anchorRef.current.contains(event.target)) {
+    //   return;
+    // }
 
     setOpen(false);
   };
@@ -100,14 +67,7 @@ const CreateSong = () => {
     }
   }
   // return focus to the button when we transitioned from !open -> open
-  const prevOpen = React.useRef(open);
-  React.useEffect(() => {
-    if (prevOpen.current === true && open === false) {
-      anchorRef.current.focus();
-    }
 
-    prevOpen.current = open;
-  }, [open]);
   const handleRemove = (value) => {
     setSongElementList((oldValues) => {
       return oldValues.filter((songElementList) => songElementList !== value);
@@ -205,13 +165,13 @@ const CreateSong = () => {
                       value={originalKey}
                       label="Key"
                       onChange={handleChangeOriginalKey}>
-                      <MenuItem value={1}>A</MenuItem>
-                      <MenuItem value={2}>B</MenuItem>
-                      <MenuItem value={3}>C</MenuItem>
-                      <MenuItem value={4}>D</MenuItem>
-                      <MenuItem value={5}>E</MenuItem>
-                      <MenuItem value={6}>F</MenuItem>
-                      <MenuItem value={7}>G</MenuItem>
+                      <MenuItem value="A">A</MenuItem>
+                      <MenuItem value="B">B</MenuItem>
+                      <MenuItem value="C">C</MenuItem>
+                      <MenuItem value="D">D</MenuItem>
+                      <MenuItem value="E">E</MenuItem>
+                      <MenuItem value="F">F</MenuItem>
+                      <MenuItem value="G">G</MenuItem>
                     </Select>
                   </FormControl>
                 </Grid>
@@ -251,7 +211,6 @@ const CreateSong = () => {
                     <TextField
                       id={`indexas_${index}`}
                       multiline
-                      autoFocus={true}
                       minRows={5}
                       maxRows={12}
                       fullWidth
@@ -296,7 +255,6 @@ const CreateSong = () => {
                     <Paper>
                       <ClickAwayListener onClickAway={handleClose}>
                         <MenuList
-                          autoFocusItem={open}
                           id="element-intro"
                           aria-labelledby="composition-button"
                           onKeyDown={handleListKeyDown}>
