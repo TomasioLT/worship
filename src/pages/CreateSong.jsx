@@ -27,7 +27,17 @@ import RichTextEditor from "../components/RichTextEditor";
 import Tempo from "../components/Tempo";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import SongTextField from "../components/SongTextField";
-
+import { db } from "../firebase";
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  onSnapshot,
+  query,
+  querySnapshot,
+  updateDoc,
+} from "firebase/firestore";
 let nextId = 0;
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -48,12 +58,19 @@ const StyledSpeedDial = styled(SpeedDial)(({ theme }) => ({
   },
 }));
 const CreateSong = () => {
-  const [age, setAge] = React.useState("");
+  // STATES:
+  const [title, setTitle] = useState("");
+  const [authorWord, setAuthorWord] = useState("");
+  const [authorMusic, setAuthorMusic] = useState("");
+  const [originalKey, setOriginalKey] = useState("");
+  const [ccli, setCcli] = useState("");
+  const [songTempoBpm, setSongTempoBpm] = useState("");
+  const [songTempoTime, SetSongTempoTime] = useState("");
+  const [textArea, setTextArea] = useState("");
 
-  const handleChange = (event) => {
-    setAge(event.target.value);
+  const handleChangeOriginalKey = (event) => {
+    setOriginalKey(event.target.value);
   };
-
   // Dynamic append new form of song input (intro, verse, chorus ... )
   const [name, setName] = useState("");
   const [songElementList, setSongElementList] = React.useState([]);
@@ -116,11 +133,31 @@ const CreateSong = () => {
     // To write the selected text into the textarea
     document.testform.selectedtext.value = selectedText;
   }
+
+  // FIREBASE Create:
+  const submitSong = async (e) => {
+    e.preventDefault(e);
+    if (title === "") {
+      alert("please enter a song title!");
+      return;
+    }
+    await addDoc(collection(db, "songs"), {
+      title: title,
+      authorWords: authorWord,
+      authorMusic: authorMusic,
+      originalKey: originalKey,
+      ccli: ccli,
+      tempoBpm: songTempoBpm,
+      tempoTime: songTempoTime,
+      multiline: textArea,
+    });
+    e.target.reset();
+  };
   return (
     <Box>
       <Typography variant="h2">Form</Typography>
 
-      <form>
+      <form onSubmit={submitSong}>
         <Grid container spacing={2} columnSpacing={10}>
           <Grid item xs={12}>
             <Paper sx={{ p: 2 }} elevation={4}>
@@ -128,6 +165,7 @@ const CreateSong = () => {
                 <Grid item xs={12} md={4}>
                   <TextField
                     fullWidth
+                    onChange={(e) => setTitle(e.target.value)}
                     id="outlined-basic"
                     label="Song title"
                     variant="outlined"
@@ -136,6 +174,7 @@ const CreateSong = () => {
                 <Grid item xs={12} md={4}>
                   <TextField
                     fullWidth
+                    onChange={(e) => setAuthorWord(e.target.value)}
                     id="outlined-basic"
                     label="Word Author"
                     variant="outlined"
@@ -144,10 +183,18 @@ const CreateSong = () => {
                 <Grid item xs={12} md={4}>
                   <TextField
                     fullWidth
+                    onChange={(e) => setTextArea(e.target.value)}
                     id="outlined-basic"
                     label="Music author"
                     variant="outlined"
                   />
+                </Grid>
+                <Grid item xs={12}>
+                  <textarea
+                    name="selectedtext"
+                    rows="5"
+                    cols="20"
+                    onChange={(e) => setAuthorMusic(e.target.value)}></textarea>
                 </Grid>
                 <Grid item xs={4} md={4}>
                   <FormControl fullWidth>
@@ -155,9 +202,9 @@ const CreateSong = () => {
                     <Select
                       labelId="demo-simple-select-label"
                       id="demo-simple-select"
-                      value={age}
+                      value={originalKey}
                       label="Key"
-                      onChange={handleChange}>
+                      onChange={handleChangeOriginalKey}>
                       <MenuItem value={1}>A</MenuItem>
                       <MenuItem value={2}>B</MenuItem>
                       <MenuItem value={3}>C</MenuItem>
@@ -172,6 +219,7 @@ const CreateSong = () => {
                 <Grid item xs={8} md={4}>
                   <TextField
                     fullWidth
+                    onChange={(e) => setCcli(e.target.value)}
                     id="outlined-basic"
                     label="CCLI"
                     variant="outlined"
@@ -213,12 +261,7 @@ const CreateSong = () => {
                       type="button"
                       value="Get Selection"
                       onMouseDown={getSelectedText}></input>
-                    <form name="testform">
-                      <textarea
-                        name="selectedtext"
-                        rows="5"
-                        cols="20"></textarea>
-                    </form>
+                    <form name="testform"></form>
                   </Grid>
                   <Grid item xs={1} sx={{ pt: 3 }}>
                     <Fab
@@ -231,6 +274,9 @@ const CreateSong = () => {
                   </Grid>
                 </Grid>
               ))}
+              <Button variant="contained" type="submit">
+                Submit Form
+              </Button>
               <Popper
                 open={open}
                 anchorEl={anchorRef.current}
