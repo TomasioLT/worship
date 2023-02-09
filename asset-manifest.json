@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/tomasiolt.github.io/worship/static/css/main.e6c13ad2.css",
-    "main.js": "/tomasiolt.github.io/worship/static/js/main.5e47d25e.js",
-    "index.html": "/tomasiolt.github.io/worship/index.html",
-    "main.e6c13ad2.css.map": "/tomasiolt.github.io/worship/static/css/main.e6c13ad2.css.map",
-    "main.5e47d25e.js.map": "/tomasiolt.github.io/worship/static/js/main.5e47d25e.js.map"
+    "main.css": "/worship/static/css/main.e6c13ad2.css",
+    "main.js": "/worship/static/js/main.a10b13ad.js",
+    "index.html": "/worship/index.html",
+    "main.e6c13ad2.css.map": "/worship/static/css/main.e6c13ad2.css.map",
+    "main.a10b13ad.js.map": "/worship/static/js/main.a10b13ad.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.5e47d25e.js"
+    "static/js/main.a10b13ad.js"
   ]
 }
