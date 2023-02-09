@@ -107,7 +107,6 @@ const Songs = () => {
                   <TableCell align="right">{row.originalKey}</TableCell>
                   <TableCell align="right">{row.tempoBpm}</TableCell>
                   <TableCell align="right">{row.tempoTime}</TableCell>
-                  <TableCell align="right">{row.id}</TableCell>
                   <TableCell align="right">{row.authorMusic}</TableCell>
                   <TableCell align="right">{row.authorWords}</TableCell>
                   <TableCell align="right">{row.ccli}</TableCell>
