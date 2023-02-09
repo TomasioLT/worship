@@ -8,25 +8,25 @@ import MuiInput from "@mui/material/Input";
 import VolumeUp from "@mui/icons-material/VolumeUp";
 import Input from "@mui/material/Input";
 
-export default function Tempo() {
-  const [value, setValue] = React.useState(30);
+export default function Tempo(props) {
+  const [value, setValue] = React.useState(110);
+  const [firstTime, setFirstTime] = React.useState(4);
+  const [secondTime, setSecondTime] = React.useState(4);
+  const [finalTime, setFinalTime] = React.useState("");
 
   const handleSliderChange = (event, newValue) => {
     setValue(newValue);
+    propData();
   };
 
-  const handleInputChange = (event) => {
-    setValue(event.target.value === "" ? "" : Number(event.target.value));
+  const handleInputChangeTime = (event) => {
+    setFinalTime(`${firstTime}/${secondTime}`);
+    propData();
   };
-
-  const handleBlur = () => {
-    if (value < 0) {
-      setValue(0);
-    } else if (value > 300) {
-      setValue(300);
-    }
+  const propData = () => {
+    props.sliderValue(value);
+    props.tempoTime(finalTime);
   };
-
   return (
     <Box>
       <Grid container xs={12} md={12} columnGap={4}>
@@ -36,29 +36,15 @@ export default function Tempo() {
               Tempo
             </Typography>
           </Grid>
-          <Grid item xs={8}>
+          <Grid item xs={12}>
             <Slider
               value={typeof value === "number" ? value : 0}
               onChange={handleSliderChange}
+              valueLabelDisplay="on"
               aria-labelledby="input-slider"
               min={30}
               max={240}
               defaultValue={110}
-            />
-          </Grid>
-          <Grid item xs={4}>
-            <Input
-              value={value}
-              size="small"
-              onChange={handleInputChange}
-              onBlur={handleBlur}
-              inputProps={{
-                step: 1,
-                min: 30,
-                max: 240,
-                type: "number",
-                "aria-labelledby": "input-slider",
-              }}
             />
           </Grid>
         </Grid>
@@ -72,12 +58,22 @@ export default function Tempo() {
             <Input
               sx={{ width: "25px" }}
               inputProps={{ step: 1, min: 1, max: 4, type: "number" }}
+              value={firstTime}
+              onInput={(e) => {
+                setFirstTime(e.target.value);
+                handleInputChangeTime();
+              }}
               defaultValue={4}></Input>
           </Grid>
           <Grid item xs={2}>
             <Input
               sx={{ width: "30px" }}
-              defaultValue={4}
+              // defaultValue={4}
+              value={secondTime}
+              onInput={(e) => {
+                setSecondTime(e.target.value);
+                handleInputChangeTime();
+              }}
               inputProps={{ step: 1, min: 1, max: 4, type: "number" }}></Input>
           </Grid>
         </Grid>

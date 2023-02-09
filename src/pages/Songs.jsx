@@ -104,9 +104,9 @@ const Songs = () => {
                   <TableCell component="th" scope="row">
                     {row.title}
                   </TableCell>
-                  <TableCell align="right">80 BPM</TableCell>
-                  <TableCell align="right">4/4</TableCell>
                   <TableCell align="right">{row.originalKey}</TableCell>
+                  <TableCell align="right">{row.tempoBpm}</TableCell>
+                  <TableCell align="right">{row.tempoTime}</TableCell>
                   <TableCell align="right">{row.id}</TableCell>
                   <TableCell align="right">{row.authorMusic}</TableCell>
                   <TableCell align="right">{row.authorWords}</TableCell>

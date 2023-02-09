@@ -33,7 +33,6 @@ const CreateSong = () => {
   const [ccli, setCcli] = useState("");
   const [songTempoBpm, setSongTempoBpm] = useState("");
   const [songTempoTime, SetSongTempoTime] = useState("");
-  const [textArea, setTextArea] = useState("");
 
   const handleChangeOriginalKey = (event) => {
     setOriginalKey(event.target.value);
@@ -94,6 +93,12 @@ const CreateSong = () => {
     document.testform.selectedtext.value = selectedText;
   }
 
+  const sliderData = (data) => {
+    setSongTempoBpm(data);
+  };
+  const timerData = (data) => {
+    SetSongTempoTime(data);
+  };
   // FIREBASE Create:
   const submitSong = async (e) => {
     e.preventDefault(e);
@@ -109,7 +114,6 @@ const CreateSong = () => {
       ccli: ccli,
       tempoBpm: songTempoBpm,
       tempoTime: songTempoTime,
-      multiline: textArea,
     });
     e.target.reset();
   };
@@ -143,19 +147,13 @@ const CreateSong = () => {
                 <Grid item xs={12} md={4}>
                   <TextField
                     fullWidth
-                    onChange={(e) => setTextArea(e.target.value)}
+                    onChange={(e) => setAuthorMusic(e.target.value)}
                     id="outlined-basic"
                     label="Music author"
                     variant="outlined"
                   />
                 </Grid>
-                <Grid item xs={12}>
-                  <textarea
-                    name="selectedtext"
-                    rows="5"
-                    cols="20"
-                    onChange={(e) => setAuthorMusic(e.target.value)}></textarea>
-                </Grid>
+
                 <Grid item xs={4} md={4}>
                   <FormControl fullWidth>
                     <InputLabel id="demo-simple-select-label">Key</InputLabel>
@@ -186,7 +184,7 @@ const CreateSong = () => {
                   />
                 </Grid>
                 <Grid item xs={12} md={4}>
-                  <Tempo />
+                  <Tempo sliderValue={sliderData} tempoTime={timerData} />
                 </Grid>
                 <Grid item xs={12}>
                   <Button
