@@ -21,24 +21,24 @@ function App() {
         <Navbar />
         <Box mt={6} p={2}>
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/signin" element={<Signin />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/songs" element={<Songs />} />
-            <Route path="/favorites" element={<Favorites />} />
-            <Route path="/playlists" element={<Playlists />} />
-            <Route path="/contacts" element={<Contacts />} />
-            <Route path="/create" element={<CreateSong />} />
+            <Route path="/worship" element={<Home />} />
+            <Route path="/worship/signin" element={<Signin />} />
+            <Route path="/worship/signup" element={<Signup />} />
+            <Route path="/worship/dashboard" element={<Dashboard />} />
+            <Route path="/worship/songs" element={<Songs />} />
+            <Route path="/worship/favorites" element={<Favorites />} />
+            <Route path="/worship/playlists" element={<Playlists />} />
+            <Route path="/worship/contacts" element={<Contacts />} />
+            <Route path="/worship/create" element={<CreateSong />} />
             <Route
-              path="/account"
+              path="/worship/account"
               element={
                 <ProtectedRoute>
                   <Account />
                 </ProtectedRoute>
               }
             />
-            <Route path="*" element={<Navigate to="/" replace />} />
+            <Route path="*" element={<Navigate to="worship/" replace />} />
           </Routes>
         </Box>
       </AuthContextProvider>

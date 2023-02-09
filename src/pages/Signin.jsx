@@ -80,7 +80,7 @@ const Signin = () => {
           </Button>
         </form>
         <Typography variant="subtitle" textAlign="center">
-          Dont have account? <Link to="/signup">Sign up</Link>
+          Dont have account? <Link to="/worship/signup">Sign up</Link>
         </Typography>
         <Divider sx={{ my: 3 }} />
 

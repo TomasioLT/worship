@@ -218,7 +218,7 @@ export default function Navbar() {
             </IconButton>
           )}
           <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
-            <StyledLink component={Link} to="/">
+            <StyledLink component={Link} to="/worship">
               {" "}
               Mini variant drawer
             </StyledLink>
@@ -342,7 +342,7 @@ export default function Navbar() {
               </Menu>
             </Box>
           ) : (
-            <StyledLink component={Link} to="/signin">
+            <StyledLink component={Link} to="/worship/signin">
               Sign in
             </StyledLink>
           )}
@@ -362,7 +362,7 @@ export default function Navbar() {
           <Divider />
           <List>
             <ListItem disablePadding sx={{ display: "block" }}>
-              <StyledLink component={Link} to="/dashboard">
+              <StyledLink component={Link} to="/worship/dashboard">
                 <ListItemButton
                   sx={{
                     minHeight: 48,
@@ -384,7 +384,7 @@ export default function Navbar() {
               </StyledLink>
             </ListItem>
             <ListItem disablePadding sx={{ display: "block" }}>
-              <StyledLink component={Link} to="/songs">
+              <StyledLink component={Link} to="/worship/songs">
                 <ListItemButton
                   sx={{
                     minHeight: 48,
@@ -407,7 +407,7 @@ export default function Navbar() {
             </ListItem>
 
             <ListItem disablePadding sx={{ display: "block" }}>
-              <StyledLink component={Link} to="/favorites">
+              <StyledLink component={Link} to="/worship/favorites">
                 <ListItemButton
                   sx={{
                     minHeight: 48,
@@ -429,7 +429,7 @@ export default function Navbar() {
               </StyledLink>
             </ListItem>
             <ListItem disablePadding sx={{ display: "block" }}>
-              <StyledLink component={Link} to="/playlists">
+              <StyledLink component={Link} to="/worship/playlists">
                 <ListItemButton
                   sx={{
                     minHeight: 48,
@@ -452,7 +452,7 @@ export default function Navbar() {
               </StyledLink>
             </ListItem>
             <ListItem disablePadding sx={{ display: "block" }}>
-              <StyledLink component={Link} to="/contacts">
+              <StyledLink component={Link} to="/worship/contacts">
                 <ListItemButton
                   sx={{
                     minHeight: 48,
@@ -474,7 +474,7 @@ export default function Navbar() {
               </StyledLink>
             </ListItem>
             <ListItem disablePadding sx={{ display: "block" }}>
-              <StyledLink component={Link} to="/create">
+              <StyledLink component={Link} to="/worship/create">
                 <ListItemButton
                   sx={{
                     minHeight: 48,

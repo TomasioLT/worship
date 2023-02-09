@@ -72,7 +72,7 @@ const Signup = () => {
             </Grid>
           </form>
           <Typography variant="subtitle" textAlign="center">
-            Already have account? <Link to="/signin">Sign in</Link>
+            Already have account? <Link to="/worship/signin">Sign in</Link>
           </Typography>
         </CardContent>
       </Card>
