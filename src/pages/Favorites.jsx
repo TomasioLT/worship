@@ -1,6 +1,7 @@
 import { Paper, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
 import InputSlider from "../components/Children";
+import SnackBar from "../components/SnackBar";
 
 const Favorites = () => {
   const [value, setSlider] = useState("");
@@ -18,6 +19,7 @@ const Favorites = () => {
         elevation={4}>
         {value}
       </Typography>
+      <SnackBar severity={"warning"} />
     </div>
   );
 };

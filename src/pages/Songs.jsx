@@ -82,8 +82,8 @@ const Songs = () => {
     <Box>
       <Typography variant="h4">Songs List</Typography>
       <Paper sx={{ width: "100%", overflow: "hidden" }}>
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: "75vw" }} aria-label="simple table">
+        <TableContainer component={Paper} sx={{ maxWidth: "75vw" }}>
+          <Table aria-label="simple table" stickyHeader>
             <TableHead>
               <TableRow>
                 <TableCell>Song Title</TableCell>
@@ -147,7 +147,9 @@ const Songs = () => {
                   </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                  <Button onClick={handleCloseDialog} variant="outlined">
+                  <Button
+                    onClick={() => setDialogOpen(false)}
+                    variant="outlined">
                     Cancel
                   </Button>
                   <Button
@@ -175,9 +177,6 @@ const Songs = () => {
             Item has been deleted!
           </Alert>
         </Snackbar>
-        <Button variant="outlined" sx={{ m: 1 }}>
-          DEBUG
-        </Button>
       </Paper>
     </Box>
   );
