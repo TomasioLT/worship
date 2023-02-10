@@ -3,6 +3,7 @@
 ### `npm run deploy`
 ### `git add .`
 ### `git commit -m "update build for gh-pages"`
+### `git push"`
 
 
 # Getting Started with Create React App
