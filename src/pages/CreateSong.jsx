@@ -27,12 +27,18 @@ let nextId = 0;
 const CreateSong = () => {
   // STATES:
   const [title, setTitle] = useState("");
+  const [titleError, setTitleError] = useState(false);
   const [authorWord, setAuthorWord] = useState("");
+  const [authorWordError, setAuthorWordError] = useState(false);
   const [authorMusic, setAuthorMusic] = useState("");
+  const [authorMusicError, setAuthorMusicError] = useState("");
   const [originalKey, setOriginalKey] = useState("");
+  const [originalKeyError, setOriginalKeyError] = useState("");
   const [ccli, setCcli] = useState("");
+  const [ccliError, setCcliError] = useState("");
   const [songTempoBpm, setSongTempoBpm] = useState("");
   const [songTempoTime, SetSongTempoTime] = useState("");
+  const [submit, setSubmit] = useState("");
 
   const handleChangeOriginalKey = (event) => {
     setOriginalKey(event.target.value);
@@ -53,7 +59,6 @@ const CreateSong = () => {
     // if (anchorRef.current && anchorRef.current.contains(event.target)) {
     //   return;
     // }
-
     setOpen(false);
   };
 
@@ -73,6 +78,12 @@ const CreateSong = () => {
     });
   };
 
+  // Handle functions:
+  // const handleSubmit = () => {
+  //   if (!titleError && !authorWordError && !authorMusicError && !ccliError) {
+  //     setSubmit("submit");
+  //   }
+  // };
   // Selected text
   function getSelectedText() {
     var selectedText = "";
@@ -129,7 +140,16 @@ const CreateSong = () => {
                 <Grid item xs={12} md={4}>
                   <TextField
                     fullWidth
-                    onChange={(e) => setTitle(e.target.value)}
+                    required
+                    error={titleError}
+                    onChange={(e) => {
+                      setTitle(e.target.value);
+                    }}
+                    onBlur={(e) => {
+                      e.target.value === ""
+                        ? setTitleError(true)
+                        : setTitleError(false);
+                    }}
                     id="outlined-basic"
                     label="Song title"
                     variant="outlined"
@@ -138,8 +158,17 @@ const CreateSong = () => {
                 <Grid item xs={12} md={4}>
                   <TextField
                     fullWidth
-                    onChange={(e) => setAuthorWord(e.target.value)}
+                    error={authorWordError}
+                    onChange={(e) => {
+                      setAuthorWord(e.target.value);
+                    }}
+                    onBlur={(e) => {
+                      e.target.value === ""
+                        ? setAuthorWordError(true)
+                        : setAuthorWordError(false);
+                    }}
                     id="outlined-basic"
+                    required
                     label="Word Author"
                     variant="outlined"
                   />
@@ -147,13 +176,35 @@ const CreateSong = () => {
                 <Grid item xs={12} md={4}>
                   <TextField
                     fullWidth
+                    required
+                    error={authorMusicError}
                     onChange={(e) => setAuthorMusic(e.target.value)}
+                    onBlur={(e) => {
+                      e.target.value === ""
+                        ? setAuthorMusicError(true)
+                        : setAuthorMusicError(false);
+                    }}
                     id="outlined-basic"
                     label="Music author"
                     variant="outlined"
                   />
                 </Grid>
-
+                <Grid item xs={8} md={4}>
+                  <TextField
+                    fullWidth
+                    error={ccliError}
+                    onBlur={(e) => {
+                      e.target.value === ""
+                        ? setCcliError(true)
+                        : setCcliError(false);
+                    }}
+                    onChange={(e) => setCcli(e.target.value)}
+                    id="outlined-basic"
+                    label="CCLI"
+                    required
+                    variant="outlined"
+                  />
+                </Grid>
                 <Grid item xs={4} md={4}>
                   <FormControl fullWidth>
                     <InputLabel id="demo-simple-select-label">Key</InputLabel>
@@ -174,15 +225,6 @@ const CreateSong = () => {
                   </FormControl>
                 </Grid>
 
-                <Grid item xs={8} md={4}>
-                  <TextField
-                    fullWidth
-                    onChange={(e) => setCcli(e.target.value)}
-                    id="outlined-basic"
-                    label="CCLI"
-                    variant="outlined"
-                  />
-                </Grid>
                 <Grid item xs={12} md={4}>
                   <Tempo sliderValue={sliderData} tempoTime={timerData} />
                 </Grid>
